@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { deleteEmployee, listEmployees } from '../services/EmployeeService';
+import {
+  deleteEmployee,
+  getDepartmentById,
+  listEmployees,
+} from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
+import EmployeeDepartmentNameComponent from './EmployeeDepartmentNameComponent';
 
 const ListEmployeeComponent = () => {
   /* const dummyData = [
@@ -68,6 +73,7 @@ const ListEmployeeComponent = () => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Department</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -78,6 +84,11 @@ const ListEmployeeComponent = () => {
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
+              <td>
+                <EmployeeDepartmentNameComponent
+                  departmentId={employee.departmentId}
+                />
+              </td>
               <td className="d-grid gap-2 d-md-block">
                 <button
                   className="btn btn-outline-info"
