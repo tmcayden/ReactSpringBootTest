@@ -3,7 +3,6 @@ package net.javaguides.ems.controller;
 import lombok.AllArgsConstructor;
 import net.javaguides.ems.dto.DepartmentDto;
 import net.javaguides.ems.service.DepartmentService;
-import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
