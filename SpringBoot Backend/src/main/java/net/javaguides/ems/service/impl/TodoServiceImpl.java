@@ -7,9 +7,11 @@ import net.javaguides.ems.exception.ResourceNotFoundException;
 import net.javaguides.ems.repository.TodoRepository;
 import net.javaguides.ems.service.TodoService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -36,16 +38,24 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<TodoDto> getAllTodo() {
-        return null;
-    }
+        List<Todo> todos = todoRepository.findAll();
+        return todos.stream().map(todo -> modelMapper.map(todo, TodoDto.class)).collect(Collectors.toList());
+        }
 
     @Override
     public TodoDto updateTodo(Long todoId, TodoDto updatedTodo) {
-        return null;
+        Todo oldTodo = todoRepository.findById(todoId).orElseThrow(() -> new ResourceNotFoundException("A task was not found with ID: " + todoId));
+        Todo newTodo = modelMapper.map(updatedTodo, Todo.class);
+        oldTodo.setTitle(newTodo.getTitle());
+        oldTodo.setCompleted(newTodo.isCompleted());
+        oldTodo.setDescription(newTodo.getDescription());
+        Todo savedTodo = todoRepository.save(oldTodo);
+        return modelMapper.map(savedTodo, TodoDto.class);
     }
 
     @Override
     public void deleteTodo(Long todoId) {
-
+           Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new ResourceNotFoundException("A task was not found with ID: " + todoId));
+           todoRepository.delete(todo);
     }
 }
