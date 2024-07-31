@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent';
 import HomePage from './components/HomePage';
 import ListDepartmentComponent from './components/ListDepartmentComponent';
 import ListEmployeeComponent from './components/ListEmployeeComponent';
+import TaskComponent from './components/TaskComponent';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             path="edit-department/:id"
             element={<DepartmentComponent />}
           ></Route>
+          <Route path="/tasks/:id" element={<TaskComponent />}></Route>
         </Routes>
         <FooterComponent />
       </BrowserRouter>

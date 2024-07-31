@@ -1,34 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  deleteEmployee,
-  getDepartmentById,
-  listEmployees,
-} from '../services/EmployeeService';
+import { deleteEmployee, listEmployees } from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
 import EmployeeDepartmentNameComponent from './EmployeeDepartmentNameComponent';
 
 const ListEmployeeComponent = () => {
-  /* const dummyData = [
-    {
-      id: 1,
-      firstName: 'Cayden',
-      lastName: 'Hunsaker',
-      email: 'caydenhunsaker@gmail.com',
-    },
-    {
-      id: 2,
-      firstName: 'Tylee',
-      lastName: 'Hunsaker',
-      email: 'tylee.harvey16@gmail.com',
-    },
-    {
-      id: 3,
-      firstName: 'Piper',
-      lastName: 'Doggo',
-      email: 'Piper@dogs.com',
-    },
-  ]; */
-
   const [employees, setEmployees] = useState([]);
   const navigator = useNavigate();
 
@@ -52,6 +27,10 @@ const ListEmployeeComponent = () => {
 
   function updateEmployee(id) {
     navigator(`/edit-employee/${id}`);
+  }
+
+  function seeEmployeeTasks(id) {
+    navigator(`/tasks/${id}`);
   }
 
   function removeEmployee(id) {
@@ -89,18 +68,24 @@ const ListEmployeeComponent = () => {
                   departmentId={employee.departmentId}
                 />
               </td>
-              <td className="d-grid gap-2 d-md-block">
+              <td className="d-grid d-md-block text-center p-1">
                 <button
-                  className="btn btn-outline-info"
+                  className="btn btn-outline-info m-1"
                   onClick={() => updateEmployee(employee.id)}
                 >
                   Update
                 </button>
                 <button
-                  className="btn btn-outline-danger"
+                  className="btn btn-outline-danger m-1"
                   onClick={() => removeEmployee(employee.id)}
                 >
                   Delete
+                </button>
+                <button
+                  className="btn btn-outline-secondary m-1"
+                  onClick={() => seeEmployeeTasks(employee.id)}
+                >
+                  Tasks
                 </button>
               </td>
             </tr>

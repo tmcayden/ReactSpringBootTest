@@ -60,7 +60,6 @@ const DepartmentComponent = () => {
       if (id) {
         updateDepartment(id, department)
           .then((response) => {
-            console.log(response.data);
             navigator('/departments');
           })
           .catch((error) => {

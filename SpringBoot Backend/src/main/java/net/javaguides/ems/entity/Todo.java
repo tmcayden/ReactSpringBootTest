@@ -22,4 +22,7 @@ public class Todo {
     private String description;
     @Column(nullable = false)
     private boolean completed;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }

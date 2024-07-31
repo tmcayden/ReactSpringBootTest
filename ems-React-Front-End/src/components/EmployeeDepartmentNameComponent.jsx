@@ -6,7 +6,6 @@ const EmployeeDepartmentNameComponent = ({ departmentId }) => {
 
   const getDepartment = async () => {
     const department = await getDepartmentById(departmentId);
-    console.log(department);
     setDepartmentName(department.data.departmentName);
   };
 
